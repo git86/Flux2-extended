@@ -6,7 +6,7 @@ class Frontend extends ApiFrontend {
     function init(){
         parent::init();
         // Keep this if you are going to use database on all pages
-        //$this->dbConnect();
+        $this->dbConnect();
 
         // This will add some resources from atk4-addons, which would be located
         // in atk4-addons subdirectory.
@@ -30,12 +30,15 @@ class Frontend extends ApiFrontend {
             ->_load('ui.atk4_notify')
             ;
 
+
+
         // If you wish to restrict actess to your pages, use BasicAuth class
-        $this->add('BasicAuth')
-            ->allow('demo','demo')
-            // use check() and allowPage for white-list based auth checking
-            //->check()
+        $this->add('SQLAuth')
+        	
+        	->setSource('user','email','password')
             ;
+            
+        $this->auth->dq->field('user.*');
 
         // This method is executed for ALL the peages you are going to add,
         // before the page class is loaded. You can put additional checks
@@ -46,14 +49,25 @@ class Frontend extends ApiFrontend {
 
         // If you are using a complex menu, you can re-define
         // it and place in a separate class
-        $this->add('Menu',null,'Menu')
-            ->addMenuItem('Welcome','index')
-            ->addMenuItem('Examples','examples')
-            ->addMenuItem('How Do I..?','how')
-            ->addMenuItem('Database Test','dbtest')
-            ->addMenuItem('Auth test','authtest')
-            ->addMenuItem('logout')
-            ;
+       
+        
+        if($this->api->auth->isLoggedIn()){
+        
+        	$this->add('Menu',null,'Menu')
+            	->addMenuItem('Tasks','tasks')
+            	->addMenuItem('account')
+            	->addMenuItem('logout')
+            	;
+    	}else{
+    	
+    	    $this->add('Menu',null,'Menu')
+            	->addMenuItem('Register','register')
+            	->addMenuItem('Login','tasks')
+            	;
+
+    	
+    	}
+        
     }
     function page_examples($p){
         header('Location: '.$this->pm->base_path.'examples');
