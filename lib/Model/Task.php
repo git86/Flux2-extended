@@ -12,5 +12,6 @@ class Model_Task extends Model_Table {
 
 		$this->addField('user_id')->refModel('Model_User');
         
+        $this->addField('is_complete')->type('boolean');
     }
 }

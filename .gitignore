@@ -2,3 +2,6 @@
 config.php
 
 doc/todo.mwb.bak
+
+doc/dbupdates/*.sql.ok
+doc/dbupdates/*.sql.fail

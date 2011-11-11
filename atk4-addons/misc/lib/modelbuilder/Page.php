@@ -1,7 +1,5 @@
 <?php
 class modelbuilder_Page extends Page {
-	function init(){
-	}
 	function initMainPage(){
 		$c=$this->frame('Model Builder')->add('View_Columns');
 

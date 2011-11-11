@@ -7,6 +7,8 @@ class Frontend extends ApiFrontend {
         parent::init();
         // Keep this if you are going to use database on all pages
         $this->dbConnect();
+        
+        $this->add('Controller_Compat');
 
         // This will add some resources from atk4-addons, which would be located
         // in atk4-addons subdirectory.
@@ -14,7 +16,10 @@ class Frontend extends ApiFrontend {
                     'php'=>array(
                         'mvc',
                         'misc/lib',
-                        )
+                        ),
+                     'template'=>array(
+                     	'misc/templates',
+                     )
                     ))
             ->setParent($this->pathfinder->base_location);
 

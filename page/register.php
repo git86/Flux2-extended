@@ -7,6 +7,10 @@ class page_register extends Page {
         $form=$this->add('MVCForm'); 
     	$form->setModel('User');
     	
+    	$password = $form->getElement('password');
+    	$password->add('StrengthChecker',null,'before_field');
+    	
+    	
     	$button = $form->addSubmit('Register');    	
     	
     	if($form->isSubmitted()){
